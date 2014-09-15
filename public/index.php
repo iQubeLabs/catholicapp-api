@@ -605,6 +605,78 @@ $app->get('/divine_mercy_prayers(/:year(/:month(/:day)))', function($year, $mont
 
 });
 
+$app->get('/night_prayers(/:year(/:month))', function($year, $month) use ($app){
+  
+    $json_output['meta']["status"] = 0;
+    $json_output['meta']["message"] = "";
+
+    try {
+
+        if(isset($year) && isset($month)) {
+            $night_prayers = NightPrayer::select('id', 'month', 'year', 'title', 'hymn', 'psalm', 'scripture_reading', 'responsory', 'gospel_canticle', 'concluding_prayer')
+                                    ->where('year', '=', $year)
+                                    ->where('month', '=', $month)
+                                    ->first();
+
+            $json_output['meta']["status"] = 0;
+            $json_output['meta']["message"] = "Request successful!";
+
+            if($night_prayers) {
+                $json_output['data']['night_prayers'] = $night_prayers->toArray();
+            } else {
+                $json_output['data']['night_prayers'] = array();
+            }
+
+        } else {
+            $json_output['meta']["status"] = 12;
+            $json_output['meta']["message"] = "No devotion record found for the day!";
+        }
+
+        $app->response->header('Content-Type', 'application/json');
+        echo json_encode($json_output);
+
+    } catch (Exception $e) {
+        print_r($e->getMessage());
+    }
+
+});
+
+$app->get('/monthly_messages(/:year(/:month))', function($year, $month) use ($app){
+  
+    $json_output['meta']["status"] = 0;
+    $json_output['meta']["message"] = "";
+
+    try {
+
+        if(isset($year) && isset($month)) {
+            $monthly_messages = MonthlyMessage::select('id', 'month', 'year', 'month_reflection', 'editorial', 'know_your_faith')
+                                    ->where('year', '=', $year)
+                                    ->where('month', '=', $month)
+                                    ->first();
+
+            $json_output['meta']["status"] = 0;
+            $json_output['meta']["message"] = "Request successful!";
+
+            if(isset($monthly_messages)) {
+                $json_output['data']['monthly_messages'] = $monthly_messages->toArray();
+            } else {
+                $json_output['data']['monthly_messages'] = array();
+            }
+
+        } else {
+            $json_output['meta']["status"] = 12;
+            $json_output['meta']["message"] = "No devotion record found for the day!";
+        }
+
+        $app->response->header('Content-Type', 'application/json');
+        echo json_encode($json_output);
+
+    } catch (Exception $e) {
+        print_r($e->getMessage());
+    }
+
+});
+
 $app->get('/checkdates(/:year(/:month(/:day)))', function($year, $month, $day) use ($app){
 
     $formatted_date = $year.'-'.$month.'-'.$day; 

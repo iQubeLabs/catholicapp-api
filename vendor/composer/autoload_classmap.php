@@ -13,7 +13,9 @@ return array(
     'EveningPrayer' => $baseDir . '/app/models/EveningPrayer.php',
     'Mass' => $baseDir . '/app/models/Mass.php',
     'MiddayPrayer' => $baseDir . '/app/models/MiddayPrayer.php',
+    'MonthlyMessage' => $baseDir . '/app/models/MonthlyMessage.php',
     'MorningPrayer' => $baseDir . '/app/models/MorningPrayer.php',
+    'NightPrayer' => $baseDir . '/app/models/NightPrayer.php',
     'User' => $baseDir . '/app/models/User.php',
     'Usertoken' => $baseDir . '/app/models/Usertoken.php',
 );
