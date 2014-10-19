@@ -16,6 +16,8 @@ return array(
     'MonthlyMessage' => $baseDir . '/app/models/MonthlyMessage.php',
     'MorningPrayer' => $baseDir . '/app/models/MorningPrayer.php',
     'NightPrayer' => $baseDir . '/app/models/NightPrayer.php',
+    'PaymentOrder' => $baseDir . '/app/models/PaymentOrder.php',
+    'Transaction' => $baseDir . '/app/models/Transaction.php',
     'User' => $baseDir . '/app/models/User.php',
     'Usertoken' => $baseDir . '/app/models/Usertoken.php',
 );

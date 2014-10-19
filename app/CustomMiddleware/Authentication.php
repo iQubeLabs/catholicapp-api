@@ -9,8 +9,10 @@ class Authentication extends \Slim\Middleware {
 		$app = $this->app;
 		$resUri = $app->request->getResourceUri();
 		$pos = strpos($resUri, 'login');
+        $reg = strpos($resUri, 'register');
+        $payment = strpos($resUri, 'transaction');
 		// $root = $app->request->getRootUri();
-		if($pos !== false || $resUri == "/") {
+		if($pos !== false || $reg !== false || $payment !== false || $resUri == "/") {
 
 			$this->next->call();
 
