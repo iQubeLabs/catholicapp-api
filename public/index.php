@@ -53,13 +53,13 @@ define('CURRENCY_CODE', '566'); //566 => Naira
 define('ORDER_ID_PRESTRING', 'CAPP'); //566 => Naira
 define('AMOUNT', 1000); //566 => Naira
 
-$url = [
+$url = array(
     'success' => 'http://p2mu.net/pages/success.html',
     'failure' => 'http://p2mu.net/pages/failure.html',
     'pending' => 'http://p2mu.net/pages/pending.html',
     'cancelled' => 'http://p2mu.net/pages/cancelled.html',
-    'not_processed' => 'http://p2mu.net/pages/not_processed.html',
-];
+    'not_processed' => 'http://p2mu.net/pages/not_processed.html'
+);
 
 
 function getPaymentParams() {
@@ -172,7 +172,25 @@ $app->post('/register', function() use ($app) {
 
         unset($user->password);
 
+        $now = date('Y-m-d h:i:s');
+        $token = hash('md5', $now);
+        $expirydate = strtotime(EXPIRY_PERIOD);
+        $str_expirydate = date('Y-m-d h:i:s', $expirydate);
+
+        /*$userToken = Usertoken::where('user_id', '=', $user->id)->first();
+
+        if(!isset($userToken))*/
+
+        $userToken = new Usertoken;
+
+        $userToken->user_id = $user->id;
+        $userToken->token = $token;
+        $userToken->expires = $str_expirydate;
+        $userToken->lastusedate = $now;
+        $userToken->save();
+
         $dataUser["user"] = $user->toArray();
+        $dataUser["token"] = $token;
 
         echoJSONResponse($app, 0, "User Created successfully!", $dataUser);
 
