@@ -52,6 +52,10 @@ define('PAYMENT_GATEWAY_URL', "https://skyecipg.skyebankng.com:5443/MerchantServ
 define('CURRENCY_CODE', '566'); //566 => Naira
 define('ORDER_ID_PRESTRING', 'CAPP'); //566 => Naira
 define('AMOUNT', 1000); //566 => Naira
+define('NG_AMOUNT_YEARLY', 2000); //566 => Naira
+define('NG_AMOUNT_MONTHLY', 200); //566 => Naira
+define('USD_AMOUNT_YEARLY', 1.5); //566 => Naira
+define('USD_AMOUNT_MONTHLY', 15); //566 => Naira
 
 $url = array(
     'success' => 'http://p2mu.net/pages/success.html',
@@ -226,6 +230,8 @@ $app->get('/order/new', function() use ($app) {
 
     try {
 
+        $subType = $app->request->get('subtype');
+        $subType = $app->request->get('currency');
 
         $res = PaymentOrder::select('id AS auto_increment')
             ->orderBy('id', 'desc')

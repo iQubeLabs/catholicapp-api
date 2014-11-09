@@ -11,8 +11,8 @@ $capsule->addConnection(array(
     'driver'    => 'mysql',
     'host'      => 'localhost',
     'database'  => 'catholicapp',
-    'username'  => 'root',
-    'password'  => '',
+    'username'  => 'rotimi',
+    'password'  => 'rotimisdp',
     'charset'   => 'utf8',
     'collation' => 'utf8_general_ci',
     'prefix'    => ''
