@@ -53,7 +53,7 @@ class Authentication extends \Slim\Middleware {
 	        	//token is not expired
 	        	$env[$token] = array('user_id' => $usertoken->user_id);
 
-	        	$expirydate = strtotime(self::EXPIRY_PERIOD);
+	        	$expirydate = strtotime(TOKEN_EXPIRY_PERIOD);
 	            $str_expirydate = date('Y-m-d h:i:s', $expirydate);
 	        	$usertoken->lastusedate = $now;
 	        	$usertoken->expires = $str_expirydate;

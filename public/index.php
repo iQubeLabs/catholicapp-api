@@ -228,7 +228,7 @@ $app->post('/register', function() use ($app) {
 
         $now = date('Y-m-d h:i:s');
         $token = hash('md5', $now);
-        $expirydate = strtotime(EXPIRY_PERIOD);
+        $expirydate = strtotime(TOKEN_EXPIRY_PERIOD);
         $str_expirydate = date('Y-m-d h:i:s', $expirydate);
 
         /*$userToken = Usertoken::where('user_id', '=', $user->id)->first();
